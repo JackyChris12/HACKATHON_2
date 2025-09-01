@@ -110,9 +110,9 @@ This project is (closed-source)
 
 ## Author
 
-JACKLINE KIBIWOT Agroai developer
-BISMARK CHERUIYOT Agroai developer
-NELLY NASERIAN LONGESELE Agroai developer
+1. JACKLINE KIBIWOT Agroai developer
+2. BISMARK CHERUIYOT Agroai developer
+3. NELLY NASERIAN LONGESELE Agroai developer
 
 ---
 
