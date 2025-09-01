@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>Equipment Listings</title>
+  </head>
+  <body>
+    <h1>Available Equipment for Rent</h1>
+    <div class="equipment-container">
+      <% equipment.forEach(equipment => { %>
+      <div class="equipment-card">
+        <% if (equipment.image_url && equipment.image_url.startsWith('http')) {
+        %>
+        <!-- External image (e.g., from Pexels or CDN) -->
+        <img src="<%= equipment.image_url %>" alt="<%= equipment.name %>" />
+        <% } else { %>
+        <!-- Local image (e.g., from /uploads folder) -->
+        <img
+          src="/uploads/<%= equipment.image_url.replace(/^\/+/, '') %>"
+          alt="<%= equipment.name %>"
+        />
+        <% } %>
+        <div class="equipment-details">
+          <h3><%= equipment.name %></h3>
+          <p><%= equipment.description %></p>
+          <p class="equipment-price">
+            <strong>Price per Day:</strong> KES <%= equipment.price_per_day %>
+          </p>
+          <!-- ✅ Proper link to rent page with equipment ID -->
+
+          <a
+            class="rent-button"
+            href="/rent-equipment?id=<%= equipment.equipment_id %>"
+            >Rent this</a
+          >
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </body>
+</html>

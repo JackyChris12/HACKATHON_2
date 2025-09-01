@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgroAI Interface - Diagnosis</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <%- include('partials/_header.ejs') %>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <h3>🕓 Diagnosis History</h3>
+        <ul id="historyList">
+          <% history.forEach((item, index) => { %>
+          <li data-question="<%= item.question %>">
+            Q<%= index + 1 %>: <%= item.question.slice(0, 30) %>...
+          </li>
+          <% }) %>
+        </ul>
+        <hr />
+        <button id="newChatBtn">➕ New Chat</button>
+      </aside>
+
+      <main class="main-content">
+        <section class="diagnosis-container">
+          <h2>
+            Welcome <%= user?.username || "Farmer" %>, how can AgroAI help your
+            farm today?
+          </h2>
+
+          <div class="diagnosis-input-section">
+            <label for="query">Ask about crop diseases or treatments</label>
+            <input
+              type="text"
+              id="query"
+              name="query"
+              placeholder="e.g., Maize blight or chicken health"
+            />
+            <div class="diagnosis-buttons">
+              <button title="Notifications">🔔</button>
+              
+              <button title="Let AgroAI Think">🤔 Think</button>
+              <span id="username">AgroAI</span>
+              <button title="Scroll to Top" id="scrollTopBtn">↑</button>
+              <button id="askBtn">
+                <span style="color: white">🌿</span> Ask AI Chat
+              </button>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button>🌱 Crop Diagnosis</button>
+            <button>🐔 Animal Health</button>
+            <button>🌾 Soil Insights</button>
+            <button>👨‍🌾 Farmer Profiles</button>
+            <button>🏡 Farm Management New</button>
+          </div>
+
+          <div id="response" class="response"></div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      document.getElementById("username").textContent =
+        localStorage.getItem("username") || "Farmer";
+
+      async function askAgroAI() {
+        const queryEl = document.getElementById("query");
+        const responseBox = document.getElementById("response");
+        const query = queryEl.value.trim();
+        if (!query) {
+          responseBox.textContent =
+            "Please enter a question about your crops or animals.";
+          return;
+        }
+
+        responseBox.textContent =
+          "Thinking... 🤔 (This can take a few seconds)";
+
+        try {
+          const res = await fetch("/diagnosis", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ query }),
+          });
+
+          let data;
+          try {
+            data = await res.json();
+            responseBox.innerHTML = data.answer || "No answer received.";
+          } catch {
+            responseBox.textContent = await res.text();
+          }
+        } catch (err) {
+          console.error("AgroAI error:", err);
+          responseBox.textContent =
+            "There was a problem processing your question.";
+        }
+      }
+
+      document.getElementById("askBtn").addEventListener("click", askAgroAI);
+
+      document
+        .getElementById("scrollTopBtn")
+        .addEventListener("click", () =>
+          window.scrollTo({ top: 0, behavior: "smooth" })
+        );
+
+      document
+        .getElementById("newChatBtn")
+        .addEventListener("click", () => location.reload());
+
+      document.querySelectorAll("#historyList li").forEach((item) => {
+        item.addEventListener("click", () => {
+          document.getElementById("query").value =
+            item.getAttribute("data-question");
+          askAgroAI();
+        });
+      });
+    </script>
+  </body>
+</html>

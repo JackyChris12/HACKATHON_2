@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upgrade page</title>
+</head>
+<body><div class="upgrade-box">
+  <h2>🚀 Upgrade to AgroAI Premium</h2>
+  <p>✨ First month is FREE. Enter your phone and choose a plan:</p>
+
+  <input type="text" id="phone" placeholder="2547XXXXXXXX" style="padding:10px;width:80%;margin-bottom:15px;border-radius:5px;border:1px solid #ccc;">
+
+  <div class="plan" onclick="selectPlan('monthly')">
+    <span>KES 500</span> per month
+  </div>
+
+  <div class="plan" onclick="selectPlan('yearly')">
+    <span>KES 4,500</span> per year (Save 25%)
+  </div>
+
+  <button onclick="submitSubscription()" style="padding:10px 20px;margin-top:15px;border:none;background:#2d572c;color:white;border-radius:5px;cursor:pointer;">Submit</button>
+</div>
+
+<script>
+let selectedPlan = null;
+
+function selectPlan(plan) {
+  selectedPlan = plan;
+  document.querySelectorAll('.plan').forEach(p => p.style.background = '#fff');
+  document.querySelectorAll('.plan').forEach(p => p.style.color = '#2d572c');
+  event.currentTarget.style.background = '#2d572c';
+  event.currentTarget.style.color = '#fff';
+}
+
+async function submitSubscription() {
+  const phone = document.getElementById("phone").value.trim();
+  if (!phone || !selectedPlan) return alert("Enter phone and select a plan.");
+
+  try {
+    const response = await fetch("/subscription/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone, plan: selectedPlan })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Subscription error:", errorText);
+      return alert("Error: " + errorText);
+    }
+
+    const data = await response.json();
+    if (data.CheckoutRequestID || data.ResponseCode === "0") {
+      alert("STK Push sent. Complete payment on your M-Pesa app.");
+    } else {
+      alert("Payment initiation failed. Check console.");
+    }
+  } catch (err) {
+    console.error("Frontend fetch error:", err);
+    alert("Error starting subscription. Try again!");
+  }
+}
+</script>
+
+
+</body>
+</html>

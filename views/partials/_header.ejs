@@ -1,0 +1,44 @@
+<header class="main-header">
+  <div class="container">
+    <div class="logo">
+      <a href="/">Agro<span>AI</span></a>
+    </div>
+
+    <!-- Hamburger Toggle -->
+    <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav" aria-label="Main Navigation">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/diagnosis">Diagnosis</a></li>
+        <li><a href="/equipment">Rent Farm Equipment</a></li>
+        <li><a href="/predict-yield">Crop Monitoring</a></li>
+        <li><a href="/livestock">Livestock Monitoring</a></li>
+
+        <% if (user && user.userId) { %>
+          <li><a href="/dash/farmer/profile">My Profile</a></li>
+          <li><a href="/logout">Logout</a></li>
+        <% } else { %>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("navToggle");
+  const nav = document.getElementById("mainNav");
+
+  toggle.addEventListener("click", () => {
+    nav.classList.toggle("open");   // slide nav in/out
+    toggle.classList.toggle("open"); // animate hamburger into "X"
+  });
+</script>
+

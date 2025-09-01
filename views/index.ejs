@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AgroAI helps farmers diagnose crop and livestock issues, manage equipment, and more."
+    />
+    <title>AgroAI - Smart Farming Assistant</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <!-- Shared header -->
+    <%- include('partials/_header.ejs') %>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="overlay">
+        <h1 class="animate-text">Welcome to AgroAI</h1>
+        <p>Your AI-powered assistant for smarter farming.</p>
+
+        <% if (user) { %>
+          <a href="/diagnosis" class="btn btn-primary">Get Started</a>
+        <% } else { %>
+          <a href="/login" class="btn btn-primary">Get Started</a>
+        <% } %>
+      </div>
+    </header>
+<% if (typeof remainingDays !== "undefined" && remainingDays !== null) { %>
+  <% if (remainingDays > 0) { %>
+    <!-- Link the button to upgrade page -->
+    <a href="/subscription/upgrade" class="btn btn-primary">
+      ⏳ Free Trial: <%= remainingDays %> days left - Upgrade Now
+    </a>
+  <% } else { %>
+    <a href="/subscription/upgrade" class="btn btn-danger">
+      🚀 Upgrade Now - Trial Expired
+    </a>
+  <% } %>
+<% } %>
+
+    <!-- Features Section -->
+    <section class="features">
+      <h2>🚜 Features</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>🧠 AI Chat Assistant</h3>
+          <p>Ask questions about pests, diseases, fertilizers, and more.</p>
+        </div>
+        <div class="card">
+          <h3>🌿 Crop Diagnosis</h3>
+          <p>Describe symptoms or upload crop images for diagnosis.</p>
+        </div>
+        <div class="card">
+          <h3>🐄 Livestock Diagnosis</h3>
+          <p>Get suggestions on livestock diseases and treatments.</p>
+        </div>
+        <div class="card">
+          <h3>🌦️ Smart Weather Tips</h3>
+          <p>Get weather forecasts and planting advice based on location.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section class="recommendations">
+      <h2>📌 Get Personalized Recommendations</h2>
+      <p>Enter soil type, region, or climate to discover suitable crops and animals.</p>
+      <a href="/" class="btn">Explore Now</a>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+      <h2>👩‍🌾 About AgroAI</h2>
+      <p>
+        AgroAI supports smallholder and local farmers by providing fast, reliable,
+        and AI-powered agricultural advice for better yield and farm management.
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 AgroAI. All rights reserved.</p>
+    </footer>
+
+    
+
+    <script src="/script/script.js"></script>
+  </body>
+</html>

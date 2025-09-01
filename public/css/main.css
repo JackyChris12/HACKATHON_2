@@ -1,0 +1,505 @@
+/* =======================
+   MAIN LAYOUT & RESETS
+   ======================= */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9fdfb;
+  color: #2e3d2f;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =======================
+   HEADER STYLES
+   ======================= */
+.main-header {
+  background-color: #084d26; /* keep green */
+  border-bottom: 2px solid #d2e8d5;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.main-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.logo a span {
+  color: #86c232;
+}
+
+/* Desktop nav */
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+.main-nav a {
+  font-weight: 600;
+  transition: color 0.3s ease;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.main-nav a:hover {
+  color: #86c232;
+}
+
+/* Hamburger */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.nav-toggle span {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  transition: 0.3s;
+}
+
+/* =======================
+   MOBILE STYLES
+   ======================= */
+@media (max-width: 768px) {
+  /* Show hamburger on mobile */
+  .nav-toggle {
+    display: flex;
+  }
+
+  /* Mobile nav hidden off screen */
+  .main-nav {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 75%;
+    height: 100vh;
+    background-color: #084d26; /* keep green */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: left 0.4s ease-in-out;
+    z-index: 1100;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* When toggled open */
+  .main-nav.open {
+    left: 0;
+  }
+
+  /* Animate hamburger into X */
+  .nav-toggle.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  /* Responsive hero adjustments */
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+  }
+}
+
+/* =======================
+   HERO SECTION
+   ======================= */
+.hero {
+  background: url('/images/tomatoes.jpg') center/cover no-repeat;
+  height: 90vh;
+  position: relative;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero .overlay {
+  background-color: rgba(0, 0, 0, 0.55);
+  padding: 2rem;
+  width: 100%;
+  color: #fff;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.btn,
+.btn-primary {
+  background-color: #4b772f;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border-radius: 5px;
+  display: inline-block;
+  transition: background 0.3s ease;
+}
+
+.btn:hover,
+.btn-primary:hover {
+  background-color: #86c232;
+  color: #1f2e1c; /* darker text on hover for better contrast */
+}
+
+/* =======================
+   FEATURES
+   ======================= */
+.features {
+  background-color: #e6f2ea;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.features h2 {
+  color: #4b772f;
+  margin-bottom: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background-color: white;
+  border: 1px solid #d2e8d5;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* =======================
+   RECOMMENDATIONS
+   ======================= */
+.recommendations {
+  background-color: #f4fbe8;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.recommendations h2 {
+  color: #4b772f;
+  margin-bottom: 1rem;
+}
+
+.recommendations p {
+  margin-bottom: 1.5rem;
+}
+
+/* =======================
+   ABOUT SECTION
+   ======================= */
+.about {
+  background-color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.about h2 {
+  color: #4b772f;
+  margin-bottom: 1rem;
+}
+
+/* =======================
+   FOOTER
+   ======================= */
+footer {
+  background-color: #4b772f;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 3rem;
+}
+
+/* =======================
+   ANIMATIONS
+   ======================= */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Diagnosis Page Styles === */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #e6f2ea;
+  padding: 1rem;
+  border-right: 1px solid #cce0d0;
+  overflow-y: auto;
+}
+
+.sidebar h3 {
+  color: #4b772f;
+  margin-bottom: 1rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  color: #2e3d2f;
+}
+
+.sidebar li:hover {
+  color: #86c232;
+}
+
+.sidebar button {
+  background-color: #4b772f;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #ffffff;
+  overflow-y: auto;
+}
+
+.diagnosis-container h2 {
+  color: #4b772f;
+  margin-bottom: 1rem;
+}
+
+.diagnosis-input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.diagnosis-input-section input {
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: 1px solid #d2e8d5;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.diagnosis-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.diagnosis-buttons button {
+  background-color: #4b772f;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.diagnosis-buttons button:hover {
+  background-color: #86c232;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.action-buttons button {
+  background-color: #d2e8d5;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.action-buttons button:hover {
+  background-color: #bde1c8;
+}
+
+.response {
+  background-color: #f4fbe8;
+  border-left: 4px solid #4b772f;
+  padding: 1rem;
+  border-radius: 5px;
+  white-space: pre-line;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #cce0d0;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.equipment-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 10px;
+}
+
+.equipment-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.equipment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.equipment-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.equipment-details {
+  padding: 15px;
+}
+
+.equipment-details h3 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.equipment-details p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.equipment-price {
+  font-size: 1.05rem;
+  color: #27ae60;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.rent-button {
+  display: inline-block;
+  padding: 10px 16px;
+  background-color: #2ecc71;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.rent-button:hover {
+  background-color: #27ae60;
+}
+
+/* ✅ Mobile-first responsive improvements */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .equipment-details h3 {
+    font-size: 1.1rem;
+  }
+
+  .equipment-details p {
+    font-size: 0.9rem;
+  }
+
+  .equipment-price {
+    font-size: 1rem;
+  }
+
+  .rent-button {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+  }
+}
