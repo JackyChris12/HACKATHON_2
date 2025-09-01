@@ -1,4 +1,4 @@
-# AI_SMART_FARMING
+# Agroai Website
 
 AgroAi is an AI-powered agricultural assistant designed to support smallholder and local farmers by providing fast, reliable advice for smarter farming. The platform offers AI chat assistance, crop and livestock diagnosis, weather tips, and personalized recommendations to help farmers improve yield and farm management.
 
@@ -104,9 +104,15 @@ The server will run on `http://localhost:3000` by default (or the port specified
 
 This project is (closed-source)
 
+## View live
+[View Live Site](https://agroai.kobaassociation.org/)
+
+
 ## Author
 
-JACKLINE KIBIWOT AI_SMART_FARMING web developer
+JACKLINE KIBIWOT Agroai developer
+BISMARK CHERUIYOT Agroai developer
+NELLY NASERIAN LONGESELE Agroai developer
 
 ---
 
